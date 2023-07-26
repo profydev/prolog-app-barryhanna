@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Routes } from "@config/routes";
+import Link from "next/link";
+import { color } from "@styles/theme";
 
 const Header = styled.header`
   width: 100%;
@@ -28,13 +30,36 @@ const ContactButton = styled.button`
   }
 `;
 
+const HeaderNav = styled.nav`
+  display: flex;
+  gap: 2rem;
+  a {
+    color: ${color("gray", "500")};
+    text-decoration: none;
+  }
+`;
+
+const CTALink = styled.a`
+  background-color: ${color("primary", "600")};
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+`;
+
 const IssuesPage = () => {
   return (
     <div>
       <Header>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
-        <a href={Routes.projects}>Dashboard</a>
+        <HeaderNav>
+          <Link href="/">Home</Link>
+          <Link href="/products">Products</Link>
+          <Link href="/documentation">Documentation</Link>
+          <Link href="/pricing">Pricing</Link>
+        </HeaderNav>
+        <CTALink href={Routes.projects}>Open Dashboard</CTALink>
       </Header>
       <ContactButton
         onClick={() =>
