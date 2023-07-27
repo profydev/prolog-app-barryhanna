@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { breakpoint, space } from "@styles/theme";
+import { breakpoint, color, space, textFont } from "@styles/theme";
 import { ProjectCard } from "../project-card";
 import { useGetProjects } from "../../api/use-get-projects";
+import Image from "next/image";
 
 const List = styled.ul`
   display: grid;
@@ -18,8 +19,41 @@ const List = styled.ul`
   }
 `;
 
+const Alert = styled.div`
+  display: flex;
+  gap: ${space(4)};
+  align-items: center;
+  justify-content: space-between;
+  color: ${color("error", 700)};
+  border: 1px solid ${color("error", 300)};
+  border-radius: 8px;
+  padding: ${space(4)};
+  ${textFont("md", "medium")};
+
+  div,
+  button {
+    display: flex;
+    align-items: center;
+    gap: ${space(4)};
+  }
+
+  button {
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+  }
+`;
+
 export function ProjectList() {
-  const { data, isLoading, isError, error } = useGetProjects();
+  const { data, isLoading, isError, error, refetch } = useGetProjects();
+
+  const handleReload = () => {
+    refetch();
+  };
 
   if (isLoading) {
     return <div>Loading</div>;
@@ -27,7 +61,20 @@ export function ProjectList() {
 
   if (isError) {
     console.error(error);
-    return <div>Error: {error.message}</div>;
+    return (
+      <Alert>
+        <div>
+          <Image width={20} height={20} src="/icons/alert-circle.png" alt="" />
+          <p>There was a problem while loading the project data</p>
+        </div>
+        <div>
+          <button onClick={handleReload}>
+            Try again{" "}
+            <Image width={20} height={20} src="/icons/arrow-right.png" alt="" />
+          </button>
+        </div>
+      </Alert>
+    );
   }
 
   return (

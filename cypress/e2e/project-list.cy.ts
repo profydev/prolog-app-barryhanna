@@ -38,5 +38,22 @@ describe("Project List", () => {
             .should("have.attr", "href", "/dashboard/issues");
         });
     });
+
+    it("handles failure to fetch projects", () => {
+      // setup request mock
+      cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+        statusCode: 500,
+      }).as("getProjects");
+
+      // open projects page
+      cy.visit("http://localhost:3000/dashboard");
+
+      // wait for request to resolve
+      cy.wait("@getProjects");
+
+      cy.contains("There was a problem while loading the project data", {
+        timeout: 10000,
+      });
+    });
   });
 });
