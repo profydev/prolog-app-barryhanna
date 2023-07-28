@@ -1,7 +1,16 @@
 import styled from "styled-components";
+import { color } from "../../../styles/theme";
+
+export enum ButtonSize {
+  small = "small",
+  medium = "medium",
+  large = "large",
+  xlarge = "xlarge",
+}
 
 export const Button = styled.button`
   cursor: pointer;
+  color: ${color("primary", 600)};
 
   // remove default button styles
   border: none;
