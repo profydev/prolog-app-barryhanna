@@ -55,5 +55,17 @@ describe("Project List", () => {
         timeout: 10000,
       });
     });
+
+    it("properly displays project status with the correct color badge", () => {
+      // open projects page
+      cy.visit("http://localhost:3000/dashboard");
+
+      // wait for request to resolve
+      cy.wait("@getProjects");
+
+      cy.get('[color="error"').should("have.css", "color", "rgb(180, 35, 24)");
+      cy.get('[color="success"').should("have.css", "color", "rgb(2, 122, 72)");
+      cy.get('[color="warning"').should("have.css", "color", "rgb(181, 71, 8)");
+    });
   });
 });

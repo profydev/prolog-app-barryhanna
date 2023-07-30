@@ -106,7 +106,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const badgeColor = ProjectStatus[status];
   return (
     <Container>
-      <pre>{JSON.stringify(project, null, 2)}</pre>
       <TopContainer>
         <NameAndIconContainer>
           <LanguageIcon src={`/icons/${language}.svg`} alt={language} />
