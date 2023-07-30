@@ -103,6 +103,7 @@ const ViewIssuesAnchor = styled(Link)`
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const { name, language, numIssues, numEvents24h, status } = project;
+  const badgeColor = ProjectStatus[status];
   return (
     <Container>
       <TopContainer>
@@ -123,7 +124,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <IssuesNumber>{numEvents24h}</IssuesNumber>
           </Issues>
           <Status>
-            <Badge color={statusColors[status]}>{capitalize(status)}</Badge>
+            <Badge color={statusColors[badgeColor]}>
+              {capitalize(ProjectStatus[status])}
+            </Badge>
           </Status>
         </InfoContainer>
       </TopContainer>
