@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { Routes } from "@config/routes";
 import Link from "next/link";
 import { color } from "@styles/theme";
+import React from "react";
+import { Button } from "../features/ui/button";
+import Image from "next/image";
 
 const Header = styled.header`
   width: 100%;
@@ -47,7 +50,64 @@ const CTALink = styled.a`
   text-decoration: none;
 `;
 
+const SupportModal = styled.div`
+  position: fixed;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  backdrop-filter: blur(24px);
+`;
+
+const SupportModalContent = styled.div`
+  background: white;
+  width: 400px;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+`;
+
+const SupportModalHeader = styled.h2`
+  color: ${color("gray", 900)};
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-top: 2rem;
+
+  button {
+    flex: 1;
+    font-family: inherit;
+  }
+`;
+
+const SupportText = styled.p`
+  color: ${color("gray", 500)};
+  font-size: 14px;
+  line-height: 20px;
+  width: 60%;
+  margin-inline: auto;
+`;
+
+const CancelButton = styled(Button)`
+  border: 1px solid ${color("gray", 300)};
+`;
+
+const ConfirmButton = styled(Button)`
+  color: white;
+  background: ${color("primary", 600)};
+`;
+
 const IssuesPage = () => {
+  const [showSupportModal, setShowSupportModal] = React.useState(false);
   return (
     <div>
       <Header>
@@ -61,16 +121,39 @@ const IssuesPage = () => {
         </HeaderNav>
         <CTALink href={Routes.projects}>Open Dashboard</CTALink>
       </Header>
-      <ContactButton
-        onClick={() =>
-          alert(
-            "Implement this in Challenge 2 - Modal:\n\nhttps://profy.dev/rjs-challenge-modal"
-          )
-        }
-      >
+      <ContactButton onClick={() => setShowSupportModal(true)}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/message.svg" alt="Contact" />
       </ContactButton>
+      {showSupportModal && (
+        <SupportModal>
+          <SupportModalContent>
+            <Image src="/icons/mail.svg" height={48} width={48} alt="" />
+            <SupportModalHeader>Contact Us Via Email</SupportModalHeader>
+            <SupportText>
+              Any questions? Send us an email at prolog@profy.dev. We usually
+              answer within 24 hours.
+            </SupportText>
+            <ButtonContainer>
+              <CancelButton
+                onClick={() => {
+                  setShowSupportModal(false);
+                }}
+              >
+                Cancel
+              </CancelButton>
+              <ConfirmButton
+                onClick={() => {
+                  window.location.href = "mailto:support@profy.dev";
+                  setShowSupportModal(false);
+                }}
+              >
+                Open Email App
+              </ConfirmButton>
+            </ButtonContainer>
+          </SupportModalContent>
+        </SupportModal>
+      )}
     </div>
   );
 };
