@@ -29,6 +29,7 @@ export const StyledButton = styled.button<{
   color?: ButtonColor;
   icon?: ButtonIcon;
   iconSrc?: string;
+  onClick?: () => void;
 }>`
   cursor: pointer;
   color: ${color("primary", 600)};
@@ -197,6 +198,7 @@ type ButtonProps = {
   color?: ButtonColor;
   icon?: ButtonIcon;
   iconSrc?: string;
+  onClick: () => void;
 };
 
 export function Button({
