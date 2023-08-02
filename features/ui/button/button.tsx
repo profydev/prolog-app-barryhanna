@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { css } from "styled-components";
 import { color } from "../../../styles/theme";
 import Image from "next/image";
@@ -198,7 +199,7 @@ type ButtonProps = {
   color?: ButtonColor;
   icon?: ButtonIcon;
   iconSrc?: string;
-  onClick: () => void;
+  onClick?(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
 };
 
 export function Button({
@@ -207,6 +208,7 @@ export function Button({
   color = ButtonColor.primary,
   icon,
   iconSrc,
+  onClick,
 }: ButtonProps) {
   if (icon === ButtonIcon.leading && iconSrc !== undefined) {
     return (
