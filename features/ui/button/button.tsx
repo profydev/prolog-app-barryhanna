@@ -64,6 +64,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
           :hover {
             background: ${color("primary", 700)};
           }
+
+          :focus {
+            outline: 4px solid ${color("primary", 400)};
+          }
         `;
       case ButtonColor.secondary:
         return css`
@@ -74,6 +78,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
           :hover {
             background: ${color("primary", 100)};
           }
+
+          :focus {
+            outline: 4px solid ${color("primary", 100)};
+          }
         `;
       case ButtonColor.gray:
         return css`
@@ -83,6 +91,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
 
           :hover {
             background: ${color("gray", 50)};
+          }
+
+          :focus {
+            outline: 4px solid ${color("gray", 200)};
           }
         `;
 
@@ -116,6 +128,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
           :hover {
             background: ${color("error", 700)};
           }
+
+          :focus {
+            outline: 4px solid ${color("error", 100)};
+          }
         `;
       default:
         return css`
@@ -125,6 +141,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
 
           :hover {
             background: ${color("primary", 700)};
+          }
+
+          :focus {
+            outline: 4px solid ${color("primary", 400)};
           }
         `;
     }
