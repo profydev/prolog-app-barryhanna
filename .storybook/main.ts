@@ -1,16 +1,15 @@
 const path = require("path");
-
 module.exports = {
-  core: {
-    builder: "webpack5",
-  },
   stories: ["../**/*.stories.mdx", "../**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
   ],
-  framework: "@storybook/react",
+  framework: {
+    name: "@storybook/nextjs",
+    options: {},
+  },
   staticDirs: ["../public"],
   env: (config) => ({
     ...config,
@@ -28,5 +27,8 @@ module.exports = {
     config.resolve.alias["@styles"] = path.resolve("./styles");
     config.resolve.alias["@typings"] = path.resolve("./typings");
     return config;
+  },
+  docs: {
+    autodocs: true,
   },
 };
