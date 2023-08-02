@@ -55,10 +55,77 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
 
   ${(props) => {
     switch (props.color) {
+      case ButtonColor.primary:
+        return css`
+          background: ${color("primary", 600)};
+          color: white;
+          border: 1px solid transparent;
+
+          :hover {
+            background: ${color("primary", 700)};
+          }
+        `;
+      case ButtonColor.secondary:
+        return css`
+          background: ${color("primary", 50)};
+          color: ${color("primary", 700)};
+          border: 1px solid transparent;
+
+          :hover {
+            background: ${color("primary", 100)};
+          }
+        `;
+      case ButtonColor.gray:
+        return css`
+          background: white;
+          color: ${color("gray", 700)};
+          border: 1px solid ${color("gray", 300)};
+
+          :hover {
+            background: ${color("gray", 50)};
+          }
+        `;
+
+      case ButtonColor.empty:
+        return css`
+          background: white;
+          color: ${color("primary", 700)};
+          border: 1px solid transparent;
+
+          :hover {
+            background: ${color("primary", 50)};
+          }
+        `;
+      case ButtonColor.emptyGray:
+        return css`
+          background: white;
+          color: ${color("gray", 500)};
+          border: 1px solid transparent;
+
+          :hover {
+            color: ${color("gray", 600)};
+            background: ${color("gray", 50)};
+          }
+        `;
+      case ButtonColor.error:
+        return css`
+          background: ${color("error", 600)};
+          color: white;
+          border: 1px solid transparent;
+
+          :hover {
+            background: ${color("error", 700)};
+          }
+        `;
       default:
         return css`
           background: ${color("primary", 600)};
           color: white;
+          border: 1px solid transparent;
+
+          :hover {
+            background: ${color("primary", 700)};
+          }
         `;
     }
   }};
