@@ -19,7 +19,8 @@ export function MenuItemButton({
 }: MenuItemProps) {
   return (
     <ListItem className={className}>
-      <Anchor as={Button} onClick={onClick}>
+      {/* <Anchor as={Button} onClick={onClick}> */}
+      <Anchor as={Button}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <Icon
           src={iconSrc}
