@@ -41,7 +41,6 @@ export const StyledButton = styled.button<{
   line-height: normal;
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
 
   &::-moz-focus-inner {
     border: 0;
@@ -190,7 +189,6 @@ export const StyledButton = styled.button<{
         `;
     }
   }};
-
 `;
 
 type ButtonProps = {
