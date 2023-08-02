@@ -190,6 +190,7 @@ export const StyledButton = styled.button<{
         `;
     }
   }};
+
 `;
 
 type ButtonProps = {
