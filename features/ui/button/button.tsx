@@ -68,6 +68,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
           :focus {
             outline: 4px solid ${color("primary", 400)};
           }
+
+          :disabled {
+            background: ${color("primary", 200)};
+          }
         `;
       case ButtonColor.secondary:
         return css`
@@ -81,6 +85,11 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
 
           :focus {
             outline: 4px solid ${color("primary", 100)};
+          }
+
+          :disabled {
+            background: ${color("primary", 25)};
+            color: ${color("primary", 300)};
           }
         `;
       case ButtonColor.gray:
@@ -96,6 +105,11 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
           :focus {
             outline: 4px solid ${color("gray", 200)};
           }
+
+          :disabled {
+            color: ${color("gray", 300)};
+            border: 1px solid ${color("gray", 200)};
+          }
         `;
 
       case ButtonColor.empty:
@@ -107,6 +121,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
           :hover {
             background: ${color("primary", 50)};
           }
+
+          :disabled {
+            color: ${color("gray", 300)};
+          }
         `;
       case ButtonColor.emptyGray:
         return css`
@@ -117,6 +135,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
           :hover {
             color: ${color("gray", 600)};
             background: ${color("gray", 50)};
+          }
+
+          :disabled {
+            color: ${color("gray", 300)};
           }
         `;
       case ButtonColor.error:
@@ -131,6 +153,10 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
 
           :focus {
             outline: 4px solid ${color("error", 100)};
+          }
+
+          :disabled {
+            background: ${color("error", 200)};
           }
         `;
       default:
