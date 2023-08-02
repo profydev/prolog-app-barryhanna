@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, ButtonColor, ButtonSize } from "./button";
+import { Button, ButtonColor, ButtonSize, ButtonIcon } from "./button";
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -46,4 +46,40 @@ export const EmptyGray: Story = {
 
 export const Error: Story = {
   render: () => <Button color={ButtonColor.error}>Button CTA</Button>,
+};
+
+export const IconLeading: Story = {
+  render: () => (
+    <Button
+      color={ButtonColor.error}
+      icon={ButtonIcon.leading}
+      iconSrc={"/icons/icon.png"}
+    >
+      Button CTA
+    </Button>
+  ),
+};
+
+export const IconTrailing: Story = {
+  render: () => (
+    <Button
+      color={ButtonColor.error}
+      icon={ButtonIcon.trailing}
+      iconSrc={"/icons/icon.png"}
+    >
+      Button CTA
+    </Button>
+  ),
+};
+
+export const IconOnly: Story = {
+  render: () => (
+    <Button
+      color={ButtonColor.error}
+      icon={ButtonIcon.only}
+      iconSrc={"/icons/icon.png"}
+    >
+      Button CTA
+    </Button>
+  ),
 };

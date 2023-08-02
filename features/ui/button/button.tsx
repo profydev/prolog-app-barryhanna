@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { color } from "../../../styles/theme";
+import Image from "next/image";
 
 export enum ButtonSize {
   small = "small",
@@ -17,7 +18,18 @@ export enum ButtonColor {
   error = "error",
 }
 
-export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
+export enum ButtonIcon {
+  leading = "leading",
+  trailing = "trailing",
+  only = "only",
+}
+
+export const StyledButton = styled.button<{
+  size?: ButtonSize;
+  color?: ButtonColor;
+  icon?: ButtonIcon;
+  iconSrc?: string;
+}>`
   cursor: pointer;
   color: ${color("primary", 600)};
 
@@ -36,6 +48,9 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
     padding: 0;
   }
 
+  display: flex;
+  gap: 8px;
+  align-items: center;
   border-radius: 8px;
 
   padding: ${(props) => {
@@ -176,3 +191,50 @@ export const Button = styled.button<{ size?: ButtonSize; color?: ButtonColor }>`
     }
   }};
 `;
+
+type ButtonProps = {
+  children: React.ReactNode;
+  size?: ButtonSize;
+  color?: ButtonColor;
+  icon?: ButtonIcon;
+  iconSrc?: string;
+};
+
+export function Button({
+  children,
+  size = ButtonSize.medium,
+  color = ButtonColor.primary,
+  icon,
+  iconSrc,
+}: ButtonProps) {
+  if (icon === ButtonIcon.leading && iconSrc !== undefined) {
+    return (
+      <StyledButton>
+        <Image src={iconSrc} alt="" height={20} width={20} />
+        {children}
+      </StyledButton>
+    );
+  }
+
+  if (icon === ButtonIcon.trailing && iconSrc !== undefined) {
+    return (
+      <StyledButton>
+        {children}
+        <Image src={iconSrc} alt="" height={20} width={20} />
+      </StyledButton>
+    );
+  }
+
+  if (icon === ButtonIcon.only && iconSrc !== undefined) {
+    return (
+      <StyledButton>
+        <Image src={iconSrc} alt={children as string} height={20} width={20} />
+      </StyledButton>
+    );
+  }
+  return (
+    <StyledButton size={size} color={color}>
+      {children}
+    </StyledButton>
+  );
+}
