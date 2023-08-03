@@ -1,4 +1,3 @@
-import capitalize from "lodash/capitalize";
 import mockProjects from "../fixtures/projects.json";
 
 describe("Project List", () => {
@@ -66,6 +65,30 @@ describe("Project List", () => {
       cy.get('[color="error"').should("have.css", "color", "rgb(180, 35, 24)");
       cy.get('[color="success"').should("have.css", "color", "rgb(2, 122, 72)");
       cy.get('[color="warning"').should("have.css", "color", "rgb(181, 71, 8)");
+    });
+
+    it("shows loader when loading projects", () => {
+      let sendResponse;
+      const trigger = new Promise((resolve) => {
+        sendResponse = resolve;
+      });
+
+      // Intercept requests to the URL we are loading data from and do not
+      // let the response occur until our above Promise is resolved
+      cy.intercept("data-url", (request) => {
+        return trigger.then(() => {
+          request.reply();
+        });
+      });
+
+      cy.visit("http://localhost:3000/dashboard");
+
+      cy.get("#loadingSpinner")
+        .should("be.visible")
+        .then(() => {
+          sendResponse();
+          cy.get("#loadingSpinner").should("not.exist");
+        });
     });
   });
 });
