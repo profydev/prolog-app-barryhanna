@@ -59,6 +59,7 @@ export function ProjectList() {
   if (isLoading) {
     return (
       <div
+        id="loadingSpinner"
         style={{
           height: "100%",
           width: "100%",
