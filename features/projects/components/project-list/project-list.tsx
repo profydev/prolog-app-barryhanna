@@ -3,6 +3,7 @@ import { breakpoint, color, space, textFont } from "@styles/theme";
 import { ProjectCard } from "../project-card";
 import { useGetProjects } from "../../api/use-get-projects";
 import Image from "next/image";
+import MoonLoader from "react-spinners/MoonLoader";
 
 const List = styled.ul`
   display: grid;
@@ -56,7 +57,19 @@ export function ProjectList() {
   };
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return (
+      <div
+        id="loadingSpinner"
+        style={{
+          height: "100%",
+          width: "100%",
+          display: "grid",
+          placeContent: "center",
+        }}
+      >
+        <MoonLoader color="#7f56d9" />
+      </div>
+    );
   }
 
   if (isError) {
