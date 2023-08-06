@@ -17,7 +17,4 @@ export const Button = styled.button`
     border: 0;
     padding: 0;
   }
-
-  padding: 10px 18px;
-  border-radius: 8px;
 `;
