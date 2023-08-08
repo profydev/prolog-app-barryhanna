@@ -23,13 +23,18 @@ export const StyledCheckbox = styled.input.attrs({ type: "checkbox" })<{
     display: grid;
     place-items: center;
     white-space: pre;
+    line-height: 1;
     content: " ";
     content: ${(props) => {
       switch (props.state) {
         case CheckboxState.checked:
-          return "url(/icons/checkbox-tick.png)";
+          return props.cbSize === CheckboxSize.small
+            ? "url(/icons/check-small.svg"
+            : "url(/icons/check-medium.svg";
         case CheckboxState.indeterminate:
-          return "url(/icons/minus.png)";
+          return props.cbSize === CheckboxSize.small
+            ? "url(/icons/minus-small.svg"
+            : "url(/icons/minus-medium.svg";
         default:
           return " ";
       }
@@ -43,6 +48,11 @@ export const StyledCheckbox = styled.input.attrs({ type: "checkbox" })<{
       props.cbSize === CheckboxSize.small ? "16px" : "20px"};
     border: 1px solid ${color("gray", 300)};
     border-radius: 4px;
+    cursor: pointer;
+
+    &::focus::before {
+      outline: 4px solid ${color("primary", 300)};
+    }
   }
 `;
 
