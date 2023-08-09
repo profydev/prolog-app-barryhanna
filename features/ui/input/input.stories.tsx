@@ -19,3 +19,9 @@ export const Disabled: Story = {
     disabled: true,
   },
 };
+
+export const WithLabel: Story = {
+  args: {
+    label: "Email",
+  },
+};

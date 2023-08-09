@@ -18,19 +18,41 @@ const StyledInput = styled.input.attrs({ type: "text" })`
   }
 
   :disabled {
-    background: ${color("primary", 50)};
-    border: 1px solid ${color("primary", 300)};
-    color: ${color("primary", 500)};
+    background: ${color("gray", 50)};
+    border: 1px solid ${color("gray", 300)};
+    color: ${color("gray", 500)};
+  }
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    color: ${color("gray", 700)};
+    ${textFont("sm", "medium")};
   }
 `;
 
 const Input = ({
   placeholder,
   disabled,
+  label,
 }: {
   placeholder?: string;
   disabled?: boolean;
+  label?: string;
 }) => {
+  if (label) {
+    return (
+      <InputContainer>
+        <label>{label}</label>
+        <StyledInput placeholder={placeholder} disabled={disabled} />
+      </InputContainer>
+    );
+  }
+
   return <StyledInput placeholder={placeholder} disabled={disabled} />;
 };
 
