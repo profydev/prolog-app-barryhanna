@@ -50,3 +50,19 @@ export const MediumIndeterminate: Story = {
     cbSize: CheckboxSize.medium,
   },
 };
+
+export const SmallUncheckedLabel: Story = {
+  args: {
+    state: CheckboxState.unchecked,
+    cbSize: CheckboxSize.small,
+    label: "Label",
+  },
+};
+
+export const MediumCheckedLabel: Story = {
+  args: {
+    state: CheckboxState.checked,
+    cbSize: CheckboxSize.medium,
+    label: "Label",
+  },
+};
