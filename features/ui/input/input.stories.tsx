@@ -25,3 +25,9 @@ export const WithLabel: Story = {
     label: "Email",
   },
 };
+
+export const WithIcon: Story = {
+  args: {
+    icon: "/icons/mail-icon.png",
+  },
+};

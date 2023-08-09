@@ -24,10 +24,18 @@ const StyledInput = styled.input.attrs({ type: "text" })`
   }
 `;
 
+const StyledInputWithIcon = styled(StyledInput)<{ icon: string }>`
+  padding-left: 40px;
+  position: relative;
+  background: url(${(props) => props.icon}) no-repeat;
+  background-position: 13px center;
+`;
+
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: fit-content;
 
   label {
     color: ${color("gray", 700)};
@@ -39,10 +47,12 @@ const Input = ({
   placeholder,
   disabled,
   label,
+  icon,
 }: {
   placeholder?: string;
   disabled?: boolean;
   label?: string;
+  icon?: string;
 }) => {
   if (label) {
     return (
@@ -50,6 +60,16 @@ const Input = ({
         <label>{label}</label>
         <StyledInput placeholder={placeholder} disabled={disabled} />
       </InputContainer>
+    );
+  }
+
+  if (icon) {
+    return (
+      <StyledInputWithIcon
+        icon={icon}
+        placeholder={placeholder}
+        disabled={disabled}
+      />
     );
   }
 
