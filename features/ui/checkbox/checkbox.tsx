@@ -16,9 +16,10 @@ export const StyledCheckbox = styled.input.attrs({ type: "checkbox" })<{
   state: CheckboxState;
   cbSize: CheckboxSize;
 }>`
-  appearance: none;
+  /* appearance: none; */
+  visibility: hidden;
 
-  &::before {
+  + label {
     display: grid;
     place-items: center;
     white-space: pre;
@@ -39,6 +40,16 @@ export const StyledCheckbox = styled.input.attrs({ type: "checkbox" })<{
       }
     }};
 
+    :focus {
+      background: crimson;
+      border-color: red;
+      outline: 4px solid ${color("primary", 300)};
+    }
+
+    :hover {
+      border: 1px solid ${color("primary", 400)};
+    }
+
     background: ${color("primary", 50)};
     color: ${color("primary", 600)};
     height: ${(props) =>
@@ -48,17 +59,33 @@ export const StyledCheckbox = styled.input.attrs({ type: "checkbox" })<{
     border: 1px solid ${color("gray", 300)};
     border-radius: 4px;
     cursor: pointer;
+  }
 
-    &::focus::before {
-      outline: 4px solid ${color("primary", 300)};
-    }
+  :disabled ~ label {
+    content: ${(props) => {
+      switch (props.state) {
+        case CheckboxState.checked:
+          return "url(/icons/check-disabled.png)";
+        case CheckboxState.indeterminate:
+          return "url(/icons/minus-disabled.png)";
+        default:
+          return " ";
+      }
+    }};
+    background: ${color("gray", 100)};
+    border: 1px solid ${color("gray", 200)};
+  }
+
+  :disabled ~ p {
+    color: ${color("gray", 300)};
   }
 `;
 
 const CheckboxContainer = styled.div<{ cbSize: CheckboxSize }>`
-  display: flex;
-  align-items: center;
-  gap: ${(props) => (props.cbSize === CheckboxSize.small ? "8px" : "12px")};
+position: relative;
+display: flex;
+align - items: center;
+gap: ${(props) => (props.cbSize === CheckboxSize.small ? "8px" : "12px")};
 
   ${(props) => {
     const size = props.cbSize === CheckboxSize.small ? "sm" : "md";
@@ -70,13 +97,17 @@ type CheckboxProps = {
   state: CheckboxState;
   cbSize: CheckboxSize;
   label?: string;
+  disabled?: boolean;
 };
 
 const Checkbox = ({
   cbSize = CheckboxSize.small,
   state = CheckboxState.unchecked,
   label,
+  disabled = false,
 }: CheckboxProps) => {
+  const id = crypto.randomUUID();
+
   if (label) {
     const id = crypto.randomUUID();
     return (
@@ -86,18 +117,25 @@ const Checkbox = ({
           state={state}
           id={id}
           checked={state === "checked" ? true : false}
+          disabled={disabled}
         />
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id}></label>
+        <p>{label}</p>
       </CheckboxContainer>
     );
   }
 
   return (
-    <StyledCheckbox
-      cbSize={cbSize}
-      state={state}
-      checked={state === "checked" ? true : false}
-    />
+    <CheckboxContainer cbSize={cbSize}>
+      <StyledCheckbox
+        cbSize={cbSize}
+        state={state}
+        checked={state === "checked" ? true : false}
+        id={id}
+        disabled={disabled}
+      />
+      <label htmlFor={id}></label>
+    </CheckboxContainer>
   );
 };
 

@@ -66,3 +66,30 @@ export const MediumCheckedLabel: Story = {
     label: "Label",
   },
 };
+
+export const MediumCheckedLabelDisabled: Story = {
+  args: {
+    state: CheckboxState.checked,
+    cbSize: CheckboxSize.medium,
+    label: "Label",
+    disabled: true,
+  },
+};
+
+export const MediumUncheckedLabelDisabled: Story = {
+  args: {
+    state: CheckboxState.unchecked,
+    cbSize: CheckboxSize.medium,
+    label: "Label",
+    disabled: true,
+  },
+};
+
+export const MediumInderterminateLabelDisabled: Story = {
+  args: {
+    state: CheckboxState.indeterminate,
+    cbSize: CheckboxSize.medium,
+    label: "Label",
+    disabled: true,
+  },
+};
