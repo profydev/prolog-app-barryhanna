@@ -16,8 +16,7 @@ export const StyledCheckbox = styled.input.attrs({ type: "checkbox" })<{
   state: CheckboxState;
   cbSize: CheckboxSize;
 }>`
-  /* appearance: none; */
-  visibility: hidden;
+  appearance: none;
 
   + label {
     display: grid;
@@ -82,10 +81,10 @@ export const StyledCheckbox = styled.input.attrs({ type: "checkbox" })<{
 `;
 
 const CheckboxContainer = styled.div<{ cbSize: CheckboxSize }>`
-position: relative;
-display: flex;
-align - items: center;
-gap: ${(props) => (props.cbSize === CheckboxSize.small ? "8px" : "12px")};
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: ${(props) => (props.cbSize === CheckboxSize.small ? "8px" : "12px")};
 
   ${(props) => {
     const size = props.cbSize === CheckboxSize.small ? "sm" : "md";
