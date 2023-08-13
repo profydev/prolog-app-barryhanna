@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
 const StyledSelect = styled.select<{ state: SelectState }>`
+  appearance: none;
   font-family: inherit;
   color: ${(props) => {
     switch (props.state) {
@@ -19,7 +20,7 @@ const StyledSelect = styled.select<{ state: SelectState }>`
   ${textFont("md", "regular")};
   border: 1px solid ${color("gray", 300)};
   border-radius: 8px;
-  padding: 10px 14px;
+  padding: 10px 40px 14px 10px;
 
   :focus {
     border: 1px solid ${color("primary", 300)};
@@ -33,8 +34,9 @@ const StyledSelect = styled.select<{ state: SelectState }>`
   }
 `;
 
-const SelectContainer = styled.div`
+const SelectContainer = styled.div<{ state: SelectState }>`
   position: relative;
+  width: fit-content;
 
   .arrow {
     position: absolute;
@@ -42,9 +44,17 @@ const SelectContainer = styled.div`
     content: url(/icons/chevron.svg);
     height: 20px;
     width: 20px;
-    right: 50%;
-    top: 50%;
+    right: -2px;
+    top: 30px;
     transform: translate(-50%, -50%);
+    ${(props) =>
+      props.state === SelectState.open &&
+      css`
+        right: -5px;
+        top: 26px;
+        transform-origin: 0 0;
+        transform: rotate(180deg);
+      `};
   }
 `;
 
@@ -64,7 +74,7 @@ type SelectProps = {
 
 export const Select = ({ children, state, disabled }: SelectProps) => {
   return (
-    <SelectContainer>
+    <SelectContainer state={state}>
       <StyledSelect state={state} disabled={disabled}>
         {children}
       </StyledSelect>

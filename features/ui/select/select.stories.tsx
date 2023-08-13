@@ -48,3 +48,9 @@ export const Disabled: Story = {
     disabled: true,
   },
 };
+
+export const Open: Story = {
+  args: {
+    state: SelectState.open,
+  },
+};
