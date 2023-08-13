@@ -54,3 +54,10 @@ export const Open: Story = {
     state: SelectState.open,
   },
 };
+
+export const WithIcon: Story = {
+  args: {
+    state: SelectState.filled,
+    icon: "/icons/user-icon.png",
+  },
+};
