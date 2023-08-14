@@ -61,3 +61,17 @@ export const WithIcon: Story = {
     icon: "/icons/user-icon.png",
   },
 };
+
+export const WithHint: Story = {
+  args: {
+    state: SelectState.filled,
+    hint: "This is a hint text to help user.",
+  },
+};
+
+export const WithLabel: Story = {
+  args: {
+    state: SelectState.filled,
+    label: "Team member",
+  },
+};

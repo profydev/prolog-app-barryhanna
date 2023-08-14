@@ -1,6 +1,6 @@
 import { color, textFont } from "@styles/theme";
 import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode, useId } from "react";
 import styled, { css } from "styled-components";
 
 const StyledSelect = styled.select<{ state: SelectState; icon?: string }>`
@@ -39,6 +39,17 @@ const StyledSelect = styled.select<{ state: SelectState; icon?: string }>`
 const SelectContainer = styled.div<{ state: SelectState }>`
   position: relative;
   width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    position: absolute;
+    top: -22px;
+    left: 0;
+    ${textFont("sm", "regular")};
+    color: ${color("gray", 700)};
+  }
 
   img {
     position: absolute;
@@ -65,6 +76,12 @@ const SelectContainer = styled.div<{ state: SelectState }>`
         transform: rotate(180deg);
       `};
   }
+
+  p {
+    ${textFont("sm", "regular")};
+    color: ${color("gray", 500)};
+    margin-block: 0;
+  }
 `;
 
 export const enum SelectState {
@@ -80,16 +97,28 @@ type SelectProps = {
   state: SelectState;
   disabled: boolean;
   icon?: string;
+  label?: string;
+  hint?: string;
 };
 
-export const Select = ({ children, state, disabled, icon }: SelectProps) => {
+export const Select = ({
+  children,
+  state,
+  disabled,
+  icon,
+  label,
+  hint,
+}: SelectProps) => {
+  const id = useId();
   return (
     <SelectContainer state={state}>
       {icon && <Image src={icon} alt="" height={20} width={20} />}
-      <StyledSelect state={state} disabled={disabled} icon={icon}>
+      {label && <label htmlFor={id}>{label}</label>}
+      <StyledSelect id={id} state={state} disabled={disabled} icon={icon}>
         {children}
       </StyledSelect>
       <span className="arrow"></span>
+      {hint && <p>{hint}</p>}
     </SelectContainer>
   );
 };
