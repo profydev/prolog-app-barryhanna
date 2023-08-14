@@ -3,7 +3,11 @@ import Image from "next/image";
 import { ReactNode, useId } from "react";
 import styled, { css } from "styled-components";
 
-const StyledSelect = styled.select<{ state: SelectState; icon?: string }>`
+const StyledSelect = styled.select<{
+  state: SelectState;
+  icon?: string;
+  error: boolean;
+}>`
   appearance: none;
   font-family: inherit;
   color: ${(props) => {
@@ -36,7 +40,7 @@ const StyledSelect = styled.select<{ state: SelectState; icon?: string }>`
   }
 `;
 
-const SelectContainer = styled.div<{ state: SelectState }>`
+const SelectContainer = styled.div<{ state: SelectState; error: boolean }>`
   position: relative;
   width: fit-content;
   display: flex;
@@ -79,8 +83,15 @@ const SelectContainer = styled.div<{ state: SelectState }>`
 
   p {
     ${textFont("sm", "regular")};
-    color: ${color("gray", 500)};
     margin-block: 0;
+    color: ${(props) =>
+      props.error
+        ? css`
+            ${color("error", 500)}
+          `
+        : css`
+            ${color("gray", 500)}
+          `};
   }
 `;
 
@@ -99,6 +110,7 @@ type SelectProps = {
   icon?: string;
   label?: string;
   hint?: string;
+  error?: boolean;
 };
 
 export const Select = ({
@@ -108,13 +120,20 @@ export const Select = ({
   icon,
   label,
   hint,
+  error = false,
 }: SelectProps) => {
   const id = useId();
   return (
-    <SelectContainer state={state}>
+    <SelectContainer state={state} error={error}>
       {icon && <Image src={icon} alt="" height={20} width={20} />}
       {label && <label htmlFor={id}>{label}</label>}
-      <StyledSelect id={id} state={state} disabled={disabled} icon={icon}>
+      <StyledSelect
+        id={id}
+        state={state}
+        disabled={disabled}
+        icon={icon}
+        error={error}
+      >
         {children}
       </StyledSelect>
       <span className="arrow"></span>

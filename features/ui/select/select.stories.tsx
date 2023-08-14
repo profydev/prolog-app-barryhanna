@@ -75,3 +75,11 @@ export const WithLabel: Story = {
     label: "Team member",
   },
 };
+
+export const Error: Story = {
+  args: {
+    state: SelectState.filled,
+    error: true,
+    hint: "This is an error message",
+  },
+};
