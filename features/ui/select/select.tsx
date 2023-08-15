@@ -38,6 +38,17 @@ const StyledSelect = styled.select<{
     color: ${color("gray", 500)};
     border: 1px solid ${color("gray", 300)};
   }
+
+  ${(props) =>
+    props.error &&
+    css`
+      border: 1px solid ${color("error", 500)};
+
+      :focus {
+        border: 1px solid ${color("error", 500)};
+        outline: 4px solid ${color("error", 300)};
+      }
+    `}
 `;
 
 const SelectContainer = styled.div<{ state: SelectState; error: boolean }>`
